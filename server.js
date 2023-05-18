@@ -3,9 +3,11 @@ import dotenv from "dotenv";
 import colors from "colors";
 import cors from "cors";
 import morgan from "morgan";
+import "express-async-errors";
 import connectDB from "./config/db.js";
 import testRoute from "./routes/testRoutes.js";
 import authRoute from "./routes/authRoutes.js";
+import errorMiddleware from "./middelwares/errorMiddleware.js";
 //env config
 dotenv.config();
 //databse config
@@ -20,6 +22,9 @@ app.use(morgan("dev"));
 //routes
 app.use("/api/v1/test", testRoute);
 app.use("/api/v1/auth", authRoute);
+
+//validation middelware
+app.use(errorMiddleware);
 
 //PORT
 const PORT = process.env.PORT || 8000;

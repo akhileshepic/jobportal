@@ -16,9 +16,11 @@ const userSchema = new mongoose.Schema(
       unique: true,
       validate: validator.isEmail,
     },
-    email: {
+    password: {
       type: String,
       required: [true, "Password is Require"],
+      minlength: [6, "Password length should be greater than 6 character"],
+      select: true,
     },
     location: {
       type: String,
